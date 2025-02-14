@@ -1,0 +1,37 @@
+import java.util.*;
+
+final class Address {
+    private final String city;
+    private final String state;
+
+    public Address(String city, String state) {
+        this.city = city;
+        this.state = state;
+    }
+
+    public String getCity() { return city; }
+    public String getState() { return state; }
+}
+
+final class Employee {
+    private final String name;
+    private final String id;
+    private final Date dateOfJoining;
+    private final List<Address> addresses;
+
+    public Employee(String name, String id, Date dateOfJoining, List<Address> addresses) {
+        this.name = name;
+        this.id = id;
+        this.dateOfJoining = new Date(dateOfJoining.getTime()); // Defensively copy
+        List<Address> tempAddresses = new ArrayList<>();
+        for (Address address : addresses) {
+            tempAddresses.add(new Address(address.getCity(), address.getState()));
+        }
+        this.addresses = Collections.unmodifiableList(tempAddresses);
+    }
+
+    public String getName() { return name; }
+    public String getId() { return id; }
+    public Date getDateOfJoining() { return new Date(dateOfJoining.getTime()); }
+    public List<Address> getAddresses() { return addresses; }
+}
