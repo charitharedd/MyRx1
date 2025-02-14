@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class SortMapByValue {
+    public static void main(String[] args) {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(101, "John Doe");
+        map.put(102, "Jane Smith");
+        map.put(103, "Peter Johnson");
+
+        List<Map.Entry<Integer, String>> list = new ArrayList<>(map.entrySet());
+
+        list.sort(Map.Entry.comparingByValue());
+
+        Map<Integer, String> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Integer, String> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        System.out.println(sortedMap);
+    }
+}
