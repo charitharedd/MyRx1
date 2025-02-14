@@ -1,0 +1,23 @@
+def min_platforms(arrivals, departures):
+    arr = sorted([int(time.replace(":", "")) for time in arrivals])
+    dep = sorted([int(time.replace(":", "")) for time in departures])
+
+    platform_needed, max_platforms = 0, 0
+    i, j = 0, 0
+    n = len(arr)
+
+    while i < n and j < n:
+        if arr[i] < dep[j]:  # A train arrives
+            platform_needed += 1
+            max_platforms = max(max_platforms, platform_needed)
+            i += 1
+        else:  # A train departs
+            platform_needed -= 1
+            j += 1
+
+    return max_platforms
+
+# Example Usage
+arrivals = ["9:00", "9:40", "9:50", "11:00", "15:00", "18:00"]
+departures = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
+print(min_platforms(arrivals, departures))
